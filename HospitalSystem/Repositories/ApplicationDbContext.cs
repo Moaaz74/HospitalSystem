@@ -1,10 +1,11 @@
 ﻿
+using HospitalSystem.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HospitalSystem.Repositories
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
         {
@@ -20,5 +21,7 @@ namespace HospitalSystem.Repositories
         {
             base.OnModelCreating(builder);
         }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
