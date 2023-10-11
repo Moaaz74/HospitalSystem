@@ -5,6 +5,7 @@ using HospitalSystem.Utilities;
 using HospitalSystem.Models;
 using HospitalSystem.Repositories.Interfaces;
 using HospitalSystem.Repositories.Implementations;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace HospitalSystem
 {
@@ -19,10 +20,11 @@ namespace HospitalSystem
 
             builder.Services.AddScoped<IDbInitializer, DbInitializer>();
             builder.Services.AddTransient<IUnitOfWork , UnitOfWork>();
+            builder.Services.AddScoped<IEmailSender , EmailSender>();
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddIdentity<IdentityUser , IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddIdentity<ApplicationUser , IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.AddRazorPages();
 
