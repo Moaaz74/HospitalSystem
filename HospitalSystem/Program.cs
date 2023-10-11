@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using HospitalSystem.Utilities;
 using HospitalSystem.Models;
+using HospitalSystem.Repositories.Interfaces;
+using HospitalSystem.Repositories.Implementations;
 
 namespace HospitalSystem
 {
@@ -16,10 +18,13 @@ namespace HospitalSystem
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+            builder.Services.AddTransient<IUnitOfWork , UnitOfWork>();
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddIdentity<IdentityUser , IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+            builder.Services.AddRazorPages();
 
             var app = builder.Build();
 
@@ -34,15 +39,27 @@ namespace HospitalSystem
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            DataSeeding();
+
             app.UseRouting();
 
             app.UseAuthorization();
 
+            app.MapRazorPages();
+
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{Area=Patient}/{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+            void DataSeeding()
+            {
+                using (var scope = app.Services.CreateScope())
+                {
+                    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+                    dbInitializer.Initialize();
+                }
+            }
         }
     }
 }
