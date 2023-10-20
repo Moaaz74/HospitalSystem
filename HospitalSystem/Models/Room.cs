@@ -6,13 +6,14 @@ namespace HospitalSystem.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please Enter Room Number")]
+        [Display(Name = "Room Number")]
         public int RoomNumber { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please Enter Room Type")]
         public string Type { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please Choose Room Status")]
         public RoomStatus Status { get; set; }
 
     }

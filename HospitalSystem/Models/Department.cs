@@ -6,10 +6,10 @@ namespace HospitalSystem.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please Enter Department Name")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please Choose Department Type")]
         public DepartmentType Type { get; set; }
 
         public string Description { get; set; }
