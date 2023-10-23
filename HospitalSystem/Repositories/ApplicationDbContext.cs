@@ -10,11 +10,13 @@ namespace HospitalSystem.Repositories
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
         {
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
+            optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

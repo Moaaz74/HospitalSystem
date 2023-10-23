@@ -57,6 +57,6 @@ namespace HospitalSystem.Models
 
     public enum Gender
     {
-        Female, Male, M, F
+        Female, Male
     }
 }

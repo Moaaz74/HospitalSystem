@@ -39,6 +39,13 @@ namespace HospitalSystem.Utilities
                 {
                     UserName = "Moaaz74",
                     Email = "moaazmostafa7474@gmail.com",
+                    Discriminator = 1,
+                    DOB = new DateTime(2002 , 9 , 8),
+                    Gender = Gender.Male,
+                    Nationality = "Egyptian",
+                    PhoneNumber = "+201145119572",
+                    DepartmentId = 1,
+                    
                 },"Mo@@z_Admin74").GetAwaiter().GetResult();
 
                 var AppUser = applicationDbContext.ApplicationUsers.FirstOrDefault(x => x.Email == "moaazmostafa7474@gmail.com");

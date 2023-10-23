@@ -14,13 +14,13 @@ namespace HospitalSystem.Models
 
         public string Description { get; set; }
 
-        public ICollection<ApplicationUser> Employees { get; set; }
+        public ICollection<ApplicationUser>? Employees { get; set; }
     }
 
     public enum DepartmentType
     {
         Cardiology , Endocrinology , Hematology , InternalMedicine , Oncology ,
         Surgery , Pediatric , ObstetricsAndGynaecology , Neurology , ENT ,
-        Dentistry , Hepatology , Ophthalmologist
+        Dentistry , Hepatology , Ophthalmologist , Management
     }
 }

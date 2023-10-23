@@ -4,6 +4,6 @@
     {
         IRepository<T> Repository<T>() where T : class;
 
-        void save();
+        void Save();
     }
 }

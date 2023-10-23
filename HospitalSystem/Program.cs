@@ -6,6 +6,7 @@ using HospitalSystem.Models;
 using HospitalSystem.Repositories.Interfaces;
 using HospitalSystem.Repositories.Implementations;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using HospitalSystem.Services;
 
 namespace HospitalSystem
 {
@@ -21,6 +22,8 @@ namespace HospitalSystem
             builder.Services.AddScoped<IDbInitializer, DbInitializer>();
             builder.Services.AddTransient<IUnitOfWork , UnitOfWork>();
             builder.Services.AddScoped<IEmailSender , EmailSender>();
+            builder.Services.AddTransient<IDepartmentService , DepartmentService>();
+
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -51,7 +54,7 @@ namespace HospitalSystem
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{Area=Patient}/{controller=Home}/{action=Index}/{id?}");
+                pattern: "{Area=Admin}/{controller=Departments}/{action=Index}/{id?}");
 
             app.Run();
             void DataSeeding()

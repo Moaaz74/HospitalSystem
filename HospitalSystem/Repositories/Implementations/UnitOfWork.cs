@@ -34,7 +34,7 @@ namespace HospitalSystem.Repositories.Implementations
             return repository;
         }
 
-        public void save()
+        public void Save()
         {
             _context.SaveChanges();  
         }
