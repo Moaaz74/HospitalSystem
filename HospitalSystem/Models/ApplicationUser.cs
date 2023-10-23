@@ -17,13 +17,29 @@ namespace HospitalSystem.Models
 
         public DateTime DOB { get; set; }
 
+        [ForeignKey("DepartmentId")]
+        public int DepartmentId { get; set; }
+
         public Department Department { get; set; }
 
         public Specialist Specialist { get; set; }
 
-        public ICollection<Appointment> Appointments { get; set; }
+        [InverseProperty("Doctor")]
+        public ICollection<Appointment> DoctorAppointments { get; set; }
+
+        [InverseProperty("Patient")]
+        public ICollection<Appointment> PatientAppointment { get; set; }
 
         public DoctorStatus DoctorStatus { get; set; }
+
+        [Required]
+        public short Discriminator { get; set; }
+
+        [InverseProperty("Doctor")]
+        public PatientReport DoctorReport { get; set; }
+
+        [InverseProperty("Patient")]
+        public ICollection<PatientReport> PatientReports { get; set; }
 
     }
 
